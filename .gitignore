@@ -21,3 +21,51 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Model files
+*.pkl
+*.h5
+*.pth
+
+# Results
+*.png
+*.jpg
+*.jpeg
+!public/*.png
+!public/*.jpg
