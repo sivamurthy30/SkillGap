@@ -1,11 +1,17 @@
 import pandas as pd
 import numpy as np
 from typing import Dict, Optional
+import os
 
 # -------------------------------------------------- #
 # 📊 LOAD SKILL METADATA
 # -------------------------------------------------- #
-skills_df = pd.read_csv("data/skill_metadata.csv")
+# Get absolute path to data directory
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, ".."))
+DATA_PATH = os.path.join(PROJECT_ROOT, "data", "skill_metadata.csv")
+
+skills_df = pd.read_csv(DATA_PATH)
 
 
 # -------------------------------------------------- #

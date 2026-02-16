@@ -86,6 +86,9 @@ class GitHubAnalyzer:
             # Get user info
             user_data = self._get_user_data(username)
             
+            if not user_data:
+                raise Exception("Failed to fetch user data")
+            
             # Get repositories
             repos = self._get_user_repos(username)
             
@@ -106,16 +109,16 @@ class GitHubAnalyzer:
             
             return {
                 'username': username,
-                'skills': list(skills),
-                'languages': languages,
-                'top_repos': top_repos,
+                'skills': list(skills) if skills else [],
+                'languages': languages if languages else {},
+                'top_repos': top_repos if top_repos else [],
                 'activity_score': activity_score,
                 'contribution_years': contribution_years,
                 'metadata': {
-                    'public_repos': user_data.get('public_repos', 0),
-                    'followers': user_data.get('followers', 0),
-                    'total_stars': sum(r.get('stargazers_count', 0) for r in repos),
-                    'total_forks': sum(r.get('forks_count', 0) for r in repos),
+                    'public_repos': user_data.get('public_repos', 0) or 0,
+                    'followers': user_data.get('followers', 0) or 0,
+                    'total_stars': sum((r.get('stargazers_count') or 0) for r in repos if r) if repos else 0,
+                    'total_forks': sum((r.get('forks_count') or 0) for r in repos if r) if repos else 0,
                 }
             }
         
@@ -164,8 +167,11 @@ class GitHubAnalyzer:
         """
         language_stats = Counter()
         
+        if not repos:
+            return {}
+        
         for repo in repos:
-            if repo.get('fork'):  # Skip forked repos
+            if not repo or repo.get('fork'):  # Skip forked repos and None repos
                 continue
             
             # Get language breakdown for this repo
@@ -176,8 +182,10 @@ class GitHubAnalyzer:
                     response.raise_for_status()
                     lang_data = response.json()
                     
-                    for lang, bytes_count in lang_data.items():
-                        language_stats[lang] += bytes_count
+                    if lang_data:
+                        for lang, bytes_count in lang_data.items():
+                            if lang and bytes_count:
+                                language_stats[lang] += bytes_count
                 
                 except:
                     # Fallback to primary language
@@ -203,30 +211,41 @@ class GitHubAnalyzer:
         skills = set()
         
         # Add skills from languages
-        for language, percentage in languages.items():
-            if percentage > 5:  # Only if significant usage (>5%)
-                mapped_skills = self.language_skill_map.get(language, [language])
-                skills.update(mapped_skills)
+        if languages:
+            for language, percentage in languages.items():
+                if percentage > 5:  # Only if significant usage (>5%)
+                    mapped_skills = self.language_skill_map.get(language, [language])
+                    skills.update(mapped_skills)
         
         # Scan repo names and descriptions for tech keywords
-        for repo in repos:
-            if repo.get('fork'):
-                continue
-            
-            text = f"{repo.get('name', '')} {repo.get('description', '')}".lower()
-            
-            for pattern, skill in self.tech_patterns.items():
-                if pattern in text:
-                    skills.add(skill)
+        if repos:
+            for repo in repos:
+                if not repo or repo.get('fork'):
+                    continue
+                
+                # Safely get name and description with None checks
+                name = repo.get('name') or ''
+                description = repo.get('description') or ''
+                text = f"{name} {description}".lower()
+                
+                for pattern, skill in self.tech_patterns.items():
+                    if pattern in text:
+                        skills.add(skill)
         
         # Analyze topics/tags
-        for repo in repos:
-            topics = repo.get('topics', [])
-            for topic in topics:
-                # Capitalize topic as potential skill
-                capitalized_topic = topic.replace('-', ' ').title()
-                if len(capitalized_topic.split()) <= 3:  # Avoid long phrases
-                    skills.add(capitalized_topic)
+        if repos:
+            for repo in repos:
+                if not repo:
+                    continue
+                    
+                topics = repo.get('topics') or []
+                if topics:
+                    for topic in topics:
+                        if topic:  # Check topic is not None
+                            # Capitalize topic as potential skill
+                            capitalized_topic = topic.replace('-', ' ').title()
+                            if len(capitalized_topic.split()) <= 3:  # Avoid long phrases
+                                skills.add(capitalized_topic)
         
         return skills
     
@@ -242,26 +261,34 @@ class GitHubAnalyzer:
         """
         score = 0.0
         
+        if not user_data:
+            return 0.0
+        
         # Repos (max 0.3)
-        repo_count = user_data.get('public_repos', 0)
+        repo_count = user_data.get('public_repos', 0) or 0
         score += min(repo_count / 50, 0.3)
         
         # Stars (max 0.3)
-        total_stars = sum(r.get('stargazers_count', 0) for r in repos)
-        score += min(total_stars / 100, 0.3)
+        if repos:
+            total_stars = sum(r.get('stargazers_count', 0) or 0 for r in repos if r)
+            score += min(total_stars / 100, 0.3)
         
         # Followers (max 0.2)
-        followers = user_data.get('followers', 0)
+        followers = user_data.get('followers', 0) or 0
         score += min(followers / 50, 0.2)
         
         # Recent activity (max 0.2)
-        recent_repos = sum(1 for r in repos if self._is_recently_updated(r))
-        score += min(recent_repos / 10, 0.2)
+        if repos:
+            recent_repos = sum(1 for r in repos if r and self._is_recently_updated(r))
+            score += min(recent_repos / 10, 0.2)
         
         return round(min(score, 1.0), 2)
     
     def _is_recently_updated(self, repo: Dict) -> bool:
         """Check if repo was updated in last 6 months"""
+        if not repo:
+            return False
+            
         from datetime import datetime, timedelta
         
         updated_at = repo.get('updated_at', '')
@@ -292,14 +319,20 @@ class GitHubAnalyzer:
     
     def _get_top_repos(self, repos: List[Dict], limit: int = 5) -> List[Dict]:
         """Get top repositories by stars and activity"""
-        # Filter out forks
-        original_repos = [r for r in repos if not r.get('fork')]
+        if not repos:
+            return []
+        
+        # Filter out forks and None values
+        original_repos = [r for r in repos if r and not r.get('fork')]
+        
+        if not original_repos:
+            return []
         
         # Sort by stars and recent updates
         sorted_repos = sorted(
             original_repos,
             key=lambda r: (
-                r.get('stargazers_count', 0) * 2 +  # Weight stars more
+                (r.get('stargazers_count') or 0) * 2 +  # Weight stars more
                 (1 if self._is_recently_updated(r) else 0)
             ),
             reverse=True
@@ -308,15 +341,16 @@ class GitHubAnalyzer:
         # Return essential info
         top = []
         for repo in sorted_repos[:limit]:
-            top.append({
-                'name': repo.get('name'),
-                'description': repo.get('description', '')[:100],
-                'language': repo.get('language'),
-                'stars': repo.get('stargazers_count', 0),
-                'forks': repo.get('forks_count', 0),
-                'url': repo.get('html_url'),
-                'topics': repo.get('topics', [])
-            })
+            if repo:
+                top.append({
+                    'name': repo.get('name') or 'Unknown',
+                    'description': (repo.get('description') or '')[:100],
+                    'language': repo.get('language') or 'Unknown',
+                    'stars': repo.get('stargazers_count') or 0,
+                    'forks': repo.get('forks_count') or 0,
+                    'url': repo.get('html_url') or '',
+                    'topics': repo.get('topics') or []
+                })
         
         return top
     

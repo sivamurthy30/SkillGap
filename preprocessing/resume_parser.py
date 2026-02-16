@@ -12,9 +12,15 @@ class ResumeParser:
     Supports: PDF, DOCX, TXT
     """
     
-    def __init__(self, skills_database_path="data/skill_metadata.csv"):
+    def __init__(self, skills_database_path=None):
         """Initialize with known skills list"""
         import pandas as pd
+        
+        # Get absolute path to data directory
+        if skills_database_path is None:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            project_root = os.path.abspath(os.path.join(current_dir, ".."))
+            skills_database_path = os.path.join(project_root, "data", "skill_metadata.csv")
         
         # Load known skills
         skills_df = pd.read_csv(skills_database_path)

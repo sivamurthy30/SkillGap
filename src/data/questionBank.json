@@ -1,0 +1,417 @@
+{
+  "Python": [
+    {
+      "id": "py_001",
+      "skill": "Python",
+      "difficulty": "easy",
+      "question": "What is the correct way to create a list in Python?",
+      "options": [
+        "list = (1, 2, 3)",
+        "list = [1, 2, 3]",
+        "list = {1, 2, 3}",
+        "list = <1, 2, 3>"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Square brackets [] are used to create lists in Python. Parentheses () create tuples, and curly braces {} create sets or dictionaries.",
+      "topic": "Data Structures"
+    },
+    {
+      "id": "py_002",
+      "skill": "Python",
+      "difficulty": "easy",
+      "question": "Which keyword is used to define a function in Python?",
+      "options": ["function", "def", "func", "define"],
+      "correctAnswer": 1,
+      "explanation": "The 'def' keyword is used to define functions in Python.",
+      "topic": "Functions"
+    },
+    {
+      "id": "py_003",
+      "skill": "Python",
+      "difficulty": "medium",
+      "question": "What will be the output of: print(type([]) == list)?",
+      "options": ["True", "False", "Error", "None"],
+      "correctAnswer": 0,
+      "explanation": "[] creates an empty list, and type([]) returns <class 'list'>, which equals list, so the comparison returns True.",
+      "topic": "Data Types"
+    },
+    {
+      "id": "py_004",
+      "skill": "Python",
+      "difficulty": "medium",
+      "question": "What is the purpose of the __init__ method in Python classes?",
+      "options": [
+        "To delete an object",
+        "To initialize object attributes",
+        "To create a class",
+        "To inherit from parent class"
+      ],
+      "correctAnswer": 1,
+      "explanation": "__init__ is a constructor method that initializes object attributes when an instance is created.",
+      "topic": "Object-Oriented Programming"
+    },
+    {
+      "id": "py_005",
+      "skill": "Python",
+      "difficulty": "hard",
+      "question": "What is the time complexity of accessing an element in a Python dictionary?",
+      "options": ["O(1) average case", "O(n)", "O(log n)", "O(n²)"],
+      "correctAnswer": 0,
+      "explanation": "Python dictionaries use hash tables, providing O(1) average-case time complexity for lookups.",
+      "topic": "Data Structures & Algorithms"
+    },
+    {
+      "id": "py_006",
+      "skill": "Python",
+      "difficulty": "hard",
+      "question": "What is a decorator in Python?",
+      "options": [
+        "A function that modifies another function",
+        "A way to add comments",
+        "A type of loop",
+        "A data structure"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Decorators are functions that modify the behavior of other functions or methods, using the @decorator syntax.",
+      "topic": "Advanced Python"
+    }
+  ],
+  "JavaScript": [
+    {
+      "id": "js_001",
+      "skill": "JavaScript",
+      "difficulty": "easy",
+      "question": "Which symbol is used for single-line comments in JavaScript?",
+      "options": ["#", "//", "/* */", "--"],
+      "correctAnswer": 1,
+      "explanation": "// is used for single-line comments in JavaScript. /* */ is for multi-line comments.",
+      "topic": "Syntax"
+    },
+    {
+      "id": "js_002",
+      "skill": "JavaScript",
+      "difficulty": "easy",
+      "question": "What keyword is used to declare a constant in JavaScript?",
+      "options": ["var", "let", "const", "constant"],
+      "correctAnswer": 2,
+      "explanation": "'const' is used to declare constants that cannot be reassigned.",
+      "topic": "Variables"
+    },
+    {
+      "id": "js_003",
+      "skill": "JavaScript",
+      "difficulty": "medium",
+      "question": "What is the difference between '==' and '===' in JavaScript?",
+      "options": [
+        "No difference",
+        "== checks value, === checks value and type",
+        "=== is faster",
+        "== is deprecated"
+      ],
+      "correctAnswer": 1,
+      "explanation": "== performs type coercion before comparison, while === checks both value and type without coercion.",
+      "topic": "Operators"
+    },
+    {
+      "id": "js_004",
+      "skill": "JavaScript",
+      "difficulty": "medium",
+      "question": "What is a closure in JavaScript?",
+      "options": [
+        "A way to close the browser",
+        "A function with access to outer function's variables",
+        "A loop structure",
+        "A type of array"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A closure is a function that has access to variables in its outer (enclosing) function's scope, even after the outer function has returned.",
+      "topic": "Functions"
+    },
+    {
+      "id": "js_005",
+      "skill": "JavaScript",
+      "difficulty": "hard",
+      "question": "What is the event loop in JavaScript?",
+      "options": [
+        "A for loop that handles events",
+        "A mechanism that handles asynchronous operations",
+        "A way to loop through arrays",
+        "A debugging tool"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The event loop is a mechanism that handles asynchronous callbacks by continuously checking the call stack and callback queue.",
+      "topic": "Asynchronous JavaScript"
+    },
+    {
+      "id": "js_006",
+      "skill": "JavaScript",
+      "difficulty": "hard",
+      "question": "What is the purpose of Promise.all()?",
+      "options": [
+        "To create multiple promises",
+        "To wait for all promises to resolve",
+        "To cancel all promises",
+        "To chain promises"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Promise.all() takes an array of promises and returns a single promise that resolves when all input promises have resolved.",
+      "topic": "Promises"
+    }
+  ],
+  "React": [
+    {
+      "id": "react_001",
+      "skill": "React",
+      "difficulty": "easy",
+      "question": "What is JSX in React?",
+      "options": [
+        "A JavaScript library",
+        "A syntax extension for JavaScript",
+        "A CSS framework",
+        "A database"
+      ],
+      "correctAnswer": 1,
+      "explanation": "JSX is a syntax extension that allows you to write HTML-like code in JavaScript.",
+      "topic": "Basics"
+    },
+    {
+      "id": "react_002",
+      "skill": "React",
+      "difficulty": "easy",
+      "question": "Which hook is used to manage state in functional components?",
+      "options": ["useEffect", "useState", "useContext", "useReducer"],
+      "correctAnswer": 1,
+      "explanation": "useState is the primary hook for managing state in functional components.",
+      "topic": "Hooks"
+    },
+    {
+      "id": "react_003",
+      "skill": "React",
+      "difficulty": "medium",
+      "question": "What is the purpose of useEffect hook?",
+      "options": [
+        "To manage state",
+        "To handle side effects",
+        "To create components",
+        "To style components"
+      ],
+      "correctAnswer": 1,
+      "explanation": "useEffect is used to handle side effects like data fetching, subscriptions, or manually changing the DOM.",
+      "topic": "Hooks"
+    },
+    {
+      "id": "react_004",
+      "skill": "React",
+      "difficulty": "medium",
+      "question": "What is prop drilling in React?",
+      "options": [
+        "A debugging technique",
+        "Passing props through multiple component layers",
+        "A performance optimization",
+        "A testing method"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Prop drilling is the process of passing props through multiple intermediate components to reach a deeply nested component.",
+      "topic": "Props"
+    },
+    {
+      "id": "react_005",
+      "skill": "React",
+      "difficulty": "hard",
+      "question": "What is the Virtual DOM in React?",
+      "options": [
+        "A copy of the real DOM kept in memory",
+        "A CSS framework",
+        "A testing library",
+        "A state management tool"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The Virtual DOM is a lightweight copy of the actual DOM kept in memory. React uses it to optimize updates by comparing changes before updating the real DOM.",
+      "topic": "Architecture"
+    },
+    {
+      "id": "react_006",
+      "skill": "React",
+      "difficulty": "hard",
+      "question": "What is the purpose of React.memo()?",
+      "options": [
+        "To memorize user input",
+        "To prevent unnecessary re-renders",
+        "To store data",
+        "To create memos"
+      ],
+      "correctAnswer": 1,
+      "explanation": "React.memo() is a higher-order component that memoizes a component, preventing re-renders if props haven't changed.",
+      "topic": "Performance"
+    }
+  ],
+  "SQL": [
+    {
+      "id": "sql_001",
+      "skill": "SQL",
+      "difficulty": "easy",
+      "question": "Which SQL statement is used to retrieve data from a database?",
+      "options": ["GET", "SELECT", "FETCH", "RETRIEVE"],
+      "correctAnswer": 1,
+      "explanation": "SELECT is the SQL statement used to query and retrieve data from database tables.",
+      "topic": "Basics"
+    },
+    {
+      "id": "sql_002",
+      "skill": "SQL",
+      "difficulty": "easy",
+      "question": "What does SQL stand for?",
+      "options": [
+        "Structured Query Language",
+        "Simple Question Language",
+        "Standard Query Language",
+        "System Query Language"
+      ],
+      "correctAnswer": 0,
+      "explanation": "SQL stands for Structured Query Language, used for managing relational databases.",
+      "topic": "Basics"
+    },
+    {
+      "id": "sql_003",
+      "skill": "SQL",
+      "difficulty": "medium",
+      "question": "What is the difference between WHERE and HAVING clauses?",
+      "options": [
+        "No difference",
+        "WHERE filters rows, HAVING filters groups",
+        "HAVING is faster",
+        "WHERE is deprecated"
+      ],
+      "correctAnswer": 1,
+      "explanation": "WHERE filters individual rows before grouping, while HAVING filters groups after GROUP BY is applied.",
+      "topic": "Filtering"
+    },
+    {
+      "id": "sql_004",
+      "skill": "SQL",
+      "difficulty": "medium",
+      "question": "What type of JOIN returns all rows from both tables?",
+      "options": ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN"],
+      "correctAnswer": 3,
+      "explanation": "FULL OUTER JOIN returns all rows from both tables, with NULL values where there's no match.",
+      "topic": "Joins"
+    },
+    {
+      "id": "sql_005",
+      "skill": "SQL",
+      "difficulty": "hard",
+      "question": "What is a database index?",
+      "options": [
+        "A table of contents",
+        "A data structure that improves query speed",
+        "A backup system",
+        "A type of constraint"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An index is a data structure that improves the speed of data retrieval operations on a database table at the cost of additional storage and slower writes.",
+      "topic": "Performance"
+    },
+    {
+      "id": "sql_006",
+      "skill": "SQL",
+      "difficulty": "hard",
+      "question": "What is database normalization?",
+      "options": [
+        "Making data normal",
+        "Organizing data to reduce redundancy",
+        "Backing up data",
+        "Encrypting data"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Normalization is the process of organizing database tables to reduce data redundancy and improve data integrity.",
+      "topic": "Database Design"
+    }
+  ],
+  "Machine Learning": [
+    {
+      "id": "ml_001",
+      "skill": "Machine Learning",
+      "difficulty": "easy",
+      "question": "What is supervised learning?",
+      "options": [
+        "Learning with labeled data",
+        "Learning without data",
+        "Learning with a supervisor",
+        "Learning from mistakes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Supervised learning uses labeled training data where the correct output is known for each input.",
+      "topic": "Basics"
+    },
+    {
+      "id": "ml_002",
+      "skill": "Machine Learning",
+      "difficulty": "easy",
+      "question": "Which of these is a classification algorithm?",
+      "options": ["Linear Regression", "Logistic Regression", "K-Means", "PCA"],
+      "correctAnswer": 1,
+      "explanation": "Logistic Regression is a classification algorithm used for binary or multi-class classification problems.",
+      "topic": "Algorithms"
+    },
+    {
+      "id": "ml_003",
+      "skill": "Machine Learning",
+      "difficulty": "medium",
+      "question": "What is overfitting in machine learning?",
+      "options": [
+        "Model performs well on training but poorly on test data",
+        "Model performs poorly on all data",
+        "Model is too simple",
+        "Model trains too fast"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Overfitting occurs when a model learns the training data too well, including noise, and fails to generalize to new data.",
+      "topic": "Model Evaluation"
+    },
+    {
+      "id": "ml_004",
+      "skill": "Machine Learning",
+      "difficulty": "medium",
+      "question": "What is the purpose of cross-validation?",
+      "options": [
+        "To validate user input",
+        "To assess model performance on unseen data",
+        "To clean data",
+        "To visualize data"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Cross-validation is a technique to evaluate model performance by training and testing on different subsets of data.",
+      "topic": "Model Evaluation"
+    },
+    {
+      "id": "ml_005",
+      "skill": "Machine Learning",
+      "difficulty": "hard",
+      "question": "What is the bias-variance tradeoff?",
+      "options": [
+        "A choice between two algorithms",
+        "Balance between model simplicity and complexity",
+        "A data preprocessing technique",
+        "A type of neural network"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The bias-variance tradeoff is the balance between a model's ability to minimize bias (underfitting) and variance (overfitting).",
+      "topic": "Model Theory"
+    },
+    {
+      "id": "ml_006",
+      "skill": "Machine Learning",
+      "difficulty": "hard",
+      "question": "What is gradient descent?",
+      "options": [
+        "A way to descend mountains",
+        "An optimization algorithm to minimize loss",
+        "A data structure",
+        "A visualization technique"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Gradient descent is an iterative optimization algorithm used to minimize the loss function by updating parameters in the direction of steepest descent.",
+      "topic": "Optimization"
+    }
+  ]
+}
